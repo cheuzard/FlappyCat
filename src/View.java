@@ -4,11 +4,11 @@ import java.awt.*;
 // ==========================================
 // VUE (MVC)
 // ==========================================
-class FlappyView extends JPanel implements GameObserver {
-    private FlappyModel model;
+class View extends JPanel implements GameObserver {
+    private final Model model;
     private Image bgImage;
 
-    public FlappyView(FlappyModel model) {
+    public View(Model model) {
         this.model = model;
         this.model.attach(this); // S'abonne au modèle
         setPreferredSize(new Dimension(GameConfig.getInstance().WIDTH, GameConfig.getInstance().HEIGHT));
@@ -52,13 +52,13 @@ class FlappyView extends JPanel implements GameObserver {
         g.drawString("Best: " + GameConfig.getInstance().getHighScore(), 20, 60);
 
         if (model.isGameOver) {
-            g.setColor(new Color(0, 0, 0, 150));
+            g.setColor(new Color(0, 0, 0, 170));
             g.fillRect(0, 0, getWidth(), getHeight());
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 40));
-            g.drawString("GAME OVER", 300, 250);
+            g.drawString("GAME OVER", GameConfig.getInstance().WIDTH/2 - 40*3, 250);
             g.setFont(new Font("Arial", Font.PLAIN, 20));
-            g.drawString("Appuyez sur ESPACE pour rejouer", 250, 300);
+            g.drawString("Appuyez sur ESPACE pour rejouer", GameConfig.getInstance().WIDTH/2 - 150, 300);
         }
     }
 }

@@ -5,25 +5,25 @@ import java.util.List;
 // ==========================================
 // MODÈLE (MVC)
 // ==========================================
-class FlappyModel extends GameSubject {
+class Model extends GameSubject {
     public GameSprite cat;
     public List<ObstacleComposite> obstacles;
     public int score;
     public boolean isGameOver;
     private int tickCounter;
 
-    public FlappyModel() {
+    public Model() {
         reset();
     }
 
     public void reset() {
         GameConfig conf = GameConfig.getInstance();
         // Le chat commence avec la stratégie Gravité
-        cat = new GameSprite(100, conf.HEIGHT / 2, 40, 40, "chat.png", new GravityStrategy(), Color.ORANGE);
+        cat = new GameSprite(100, conf.HEIGHT / 2, 80, (int)(80*0.575), "chat.png", new GravityStrategy(), Color.ORANGE);
         obstacles = new ArrayList<>();
         score = 0;
         isGameOver = false;
-        tickCounter = 0;
+        tickCounter = 99; // Pour générer un obstacle immédiatement
         notifyObservers();
     }
 
@@ -46,8 +46,9 @@ class FlappyModel extends GameSubject {
 
         // 2. Gestion des obstacles (Génération & Suppression)
         tickCounter++;
-        if (tickCounter % 100 == 0) { // Tous les 100 ticks, un nouvel obstacle
+        if (tickCounter % GameConfig.getInstance().OBSTACLE_FREQUENCY == 0) { // Tous les 100 ticks, un nouvel obstacle
             obstacles.add(new ObstacleComposite(GameConfig.getInstance().WIDTH));
+            tickCounter = 0;
         }
 
         List<ObstacleComposite> toRemove = new ArrayList<>();
@@ -67,7 +68,7 @@ class FlappyModel extends GameSubject {
             }
 
             // Nettoyage hors écran
-            if (obs.x < -100) toRemove.add(obs);
+            if (obs.x < -400) toRemove.add(obs);
         }
         obstacles.removeAll(toRemove);
 

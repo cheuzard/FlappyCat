@@ -3,7 +3,7 @@ import java.awt.*;
 // Leaf (Feuille) : Un objet simple (ex: le Chat, ou un seul Livre)
 class GameSprite extends GameObject {
     private MovementStrategy strategy;
-    private Color fallbackColor; // Couleur si pas d'image
+    private final Color fallbackColor; // Couleur si pas d'image
 
     public GameSprite(int x, int y, int w, int h, String imgPath, MovementStrategy strat, Color color) {
         super(x, y, w, h, imgPath);

@@ -8,12 +8,14 @@ import java.io.*;
 class GameConfig {
     private static GameConfig instance;
 
-    public final int WIDTH = 800;
-    public final int HEIGHT = 600;
-    public final int PIPE_SPEED = 5;
+    public final int WIDTH = 1000;
+    public final int HEIGHT = 432;
+    public final int PIPE_SPEED = 8;
     public final int GRAVITY = 1;
-    public final int JUMP_STRENGTH = -15;
-    public final int PIPE_GAP = 200; // Espace entre les livres
+    public final int JUMP_STRENGTH = 12;
+    public final int PIPE_GAP = 160; // Espace entre les livres
+    public final int FPS = 40;
+    public final int OBSTACLE_FREQUENCY = 50; // Ticks entre obstacles
 
     private int highScore = 0;
     private final String SCORE_FILE = "highscore.txt";

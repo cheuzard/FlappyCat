@@ -5,18 +5,17 @@ import java.awt.event.KeyListener;
 // ==========================================
 // CONTRÔLEUR (MVC)
 // ==========================================
-class FlappyController implements KeyListener {
-    private FlappyModel model;
-    private Timer timer;
+class Controller implements KeyListener {
+    private final Model model;
 
-    public FlappyController(FlappyModel model, FlappyView view) {
+    public Controller(Model model, View view) {
         this.model = model;
 
         // Gestion des touches
         view.addKeyListener(this);
 
         // Boucle de jeu (60 FPS environ)
-        timer = new Timer(16, e -> model.updateGame());
+        Timer timer = new Timer((int) ((1 / (double) GameConfig.getInstance().FPS) * 1000), e -> model.updateGame());
         timer.start();
     }
 
