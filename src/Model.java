@@ -19,11 +19,12 @@ class Model extends GameSubject {
     public void reset() {
         GameConfig conf = GameConfig.getInstance();
         // Le chat commence avec la stratégie Gravité
-        cat = new GameSprite(100, conf.HEIGHT / 2, 80, (int)(80*0.575), "chat.png", new GravityStrategy(), Color.ORANGE);
+        cat = new GameSprite(100, conf.HEIGHT / 2 , 80, (int)(80*0.575), "chat.png", new GravityStrategy(), Color.ORANGE);
         obstacles = new ArrayList<>();
         score = 0;
         isGameOver = false;
         tickCounter = 99; // Pour générer un obstacle immédiatement
+        this.jump();
         notifyObservers();
     }
 

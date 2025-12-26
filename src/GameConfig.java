@@ -15,7 +15,7 @@ class GameConfig {
     public final int JUMP_STRENGTH = 12;
     public final int PIPE_GAP = 160; // Espace entre les livres
     public final int FPS = 40;
-    public final int OBSTACLE_FREQUENCY = 50; // Ticks entre obstacles
+    public final int OBSTACLE_FREQUENCY = 65; // Ticks entre obstacles
 
     private int highScore = 0;
     private final String SCORE_FILE = "highscore.txt";

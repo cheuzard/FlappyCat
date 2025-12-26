@@ -45,7 +45,6 @@ class View extends JPanel implements GameObserver {
         // Dessin Chat
         model.cat.draw(g);
 
-        // Interface UI
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.drawString("Score: " + model.score, 20, 30);
