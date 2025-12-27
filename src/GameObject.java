@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 
 // Component (Interface commune)
@@ -12,11 +11,7 @@ abstract class GameObject {
         this.width = w;
         this.height = h;
         // Chargement simple d'image
-        try {
-            this.image = new ImageIcon(imagePath).getImage();
-        } catch (Exception e) {
-            this.image = null;
-        }
+        this.image = ResourceLoader.getInstance().getImage(imagePath);
     }
 
     public abstract void update();

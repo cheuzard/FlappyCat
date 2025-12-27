@@ -8,8 +8,10 @@ import java.util.List;
 class Model extends GameSubject {
     public GameSprite cat;
     public List<ObstacleComposite> obstacles;
+    public BackgroundComposite background = new BackgroundComposite();
     public int score;
     public boolean isGameOver;
+    public boolean isFirstRun = true;
     private int tickCounter;
 
     public Model() {
@@ -24,23 +26,25 @@ class Model extends GameSubject {
         score = 0;
         isGameOver = false;
         tickCounter = 99; // Pour générer un obstacle immédiatement
-        this.jump();
+        background.reset();
         notifyObservers();
     }
 
     public void jump() {
-        if (!isGameOver) {
+        if (!isGameOver && !isFirstRun) {
             MovementStrategy s = cat.getStrategy();
             if (s instanceof GravityStrategy) {
                 ((GravityStrategy) s).jump();
             }
         } else {
+            isFirstRun = false;
             reset(); // Rejouer si Game Over
+            this.jump();
         }
     }
 
     public void updateGame() {
-        if (isGameOver) return;
+        if (isGameOver || isFirstRun) return;
 
         // 1. Mise à jour du chat
         cat.update();
@@ -51,6 +55,9 @@ class Model extends GameSubject {
             obstacles.add(new ObstacleComposite(GameConfig.getInstance().WIDTH));
             tickCounter = 0;
         }
+
+        // Mise à jour du background
+        background.update();
 
         List<ObstacleComposite> toRemove = new ArrayList<>();
         for (ObstacleComposite obs : obstacles) {

@@ -28,11 +28,10 @@ class ObstacleComposite extends GameObject {
         int gapY = new Random().nextInt(maxRange) + minGapY;
 
         // 3. Create Top Book
-
-        children.add(new GameSprite(x, gapY - fixedHeight, fixedWidth, fixedHeight, "livre.png", new ScrollStrategy(), Color.RED));
+        children.add(new GameSprite(x, gapY - fixedHeight, fixedWidth, fixedHeight, "livre.png", new BooksScrollStrategy(), Color.RED));
 
         // 4. Create Bottom Book
-        children.add(new GameSprite(x, gapY + conf.PIPE_GAP, fixedWidth, fixedHeight, "livre.png", new ScrollStrategy(), Color.RED));
+        children.add(new GameSprite(x, gapY + conf.PIPE_GAP, fixedWidth, fixedHeight, "livre.png", new BooksScrollStrategy(), Color.RED));
     }
 
     @Override

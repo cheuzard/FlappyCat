@@ -8,6 +8,7 @@ import java.io.*;
 class GameConfig {
     private static GameConfig instance;
 
+    public final int BACKGROUND_SPEED = 3;
     public final int WIDTH = 1000;
     public final int HEIGHT = 432;
     public final int PIPE_SPEED = 8;
