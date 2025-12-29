@@ -1,5 +1,10 @@
+package strategy;
+
+import config.GameConfig;
+import entity.GameObject;
+
 // Stratégie pour le Chat (Gravité + Saut)
-class GravityStrategy implements MovementStrategy {
+public class GravityStrategy implements MovementStrategy {
     private int velocity = 0;
 
     public void jump() {

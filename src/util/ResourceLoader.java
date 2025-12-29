@@ -1,3 +1,5 @@
+package util;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
@@ -5,9 +7,11 @@ import java.util.Map;
 
 public class ResourceLoader {
     private static ResourceLoader Loader;
-    private Map<String, Image> imageCache = new HashMap<>();
+    private final Map<String, Image> imageCache = new HashMap<>();
 
-    private ResourceLoader() {}
+    private ResourceLoader() {
+    }
+
     public static ResourceLoader getInstance() {
         if (Loader == null) {
             Loader = new ResourceLoader();

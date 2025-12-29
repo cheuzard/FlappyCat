@@ -1,0 +1,219 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+' Singleton Pattern - config.GameConfig
+class GameConfig <<Singleton>> {
+  - instance: GameConfig
+  + BACKGROUND_SPEED: int
+  + WIDTH: int
+  + HEIGHT: int
+  + PIPE_SPEED: int
+  + GRAVITY: int
+  + JUMP_STRENGTH: int
+  + PIPE_GAP: int
+  + FPS: int
+  + OBSTACLE_FREQUENCY: int
+  - highScore: int
+  - SCORE_FILE: String
+  - GameConfig()
+  + getInstance(): GameConfig
+  + saveHighScore(int score)
+  - loadHighScore()
+  + getHighScore(): int
+}
+
+' Singleton Pattern - util.ResourceLoader
+class ResourceLoader <<Singleton>> {
+  - Loader: ResourceLoader
+  - imageCache: Map<String, Image>
+  - ResourceLoader()
+  + getInstance(): ResourceLoader
+  + getImage(String imagePath): Image
+}
+
+' Strategy Pattern - strategy.MovementStrategy Interface
+interface MovementStrategy {
+  + move(GameObject obj)
+}
+
+class GravityStrategy {
+  - velocity: int
+  + jump()
+  + move(GameObject obj)
+}
+
+class BooksScrollStrategy {
+  + move(GameObject obj)
+}
+
+class BackgroundScrollStrategy {
+  + move(GameObject obj)
+}
+
+' Composite Pattern - entity.GameObject
+abstract class GameObject {
+  + x: int
+  + y: int
+  + width: int
+  + height: int
+  # image: Image
+  + GameObject(int x, int y, int w, int h, String imagePath)
+  + {abstract} update()
+  + {abstract} draw(Graphics g)
+  + getBounds(): Rectangle
+}
+
+' Composite Pattern - Leaf
+class GameSprite {
+  - strategy: MovementStrategy
+  - fallbackColor: Color
+  + GameSprite(int x, int y, int w, int h, String imgPath, MovementStrategy strat, Color color)
+  + setStrategy(MovementStrategy s)
+  + getStrategy(): MovementStrategy
+  + update()
+  + draw(Graphics g)
+}
+
+' Composite Pattern - Composite
+class ObstacleComposite {
+  - children: List<GameSprite>
+  - passed: boolean
+  + ObstacleComposite(int x)
+  - generateBooks(int x)
+  + update()
+  + draw(Graphics g)
+  + checkCollision(Rectangle playerBounds): boolean
+  + isPassed(): boolean
+  + setPassed(boolean p)
+}
+
+class BackgroundComposite {
+  - BackgroundElements: List<GameSprite>
+  - config: GameConfig
+  + BackgroundComposite()
+  + reset()
+  + update()
+  + draw(Graphics g)
+}
+
+' Observer Pattern
+interface GameObserver {
+  + updateView()
+}
+
+abstract class GameSubject {
+  # observers: List<GameObserver>
+  + attach(GameObserver o)
+  + notifyObservers()
+}
+
+' MVC Pattern - MVC.model.Model
+class Model {
+  + cat: GameSprite
+  + obstacles: List<ObstacleComposite>
+  + background: BackgroundComposite
+  + score: int
+  + isGameOver: boolean
+  + isFirstRun: boolean
+  - tickCounter: int
+  + Model()
+  + reset()
+  + jump()
+  + updateGame()
+}
+
+' MVC Pattern - MVC.view.View
+class View {
+  - model: Model
+  + View(Model model)
+  + updateView()
+  # paintComponent(Graphics g)
+}
+
+' MVC Pattern - MVC.controller.Controller
+class Controller {
+  - model: Model
+  + Controller(Model model, View view)
+  + keyPressed(KeyEvent e)
+  + keyTyped(KeyEvent e)
+  + keyReleased(KeyEvent e)
+}
+
+' Java Framework Classes
+class JPanel
+interface KeyListener
+
+' Relationships
+
+' Strategy Pattern
+MovementStrategy <|.. GravityStrategy
+MovementStrategy <|.. BooksScrollStrategy
+MovementStrategy <|.. BackgroundScrollStrategy
+GameSprite --> "X" MovementStrategy : uses
+
+' Composite Pattern
+GameObject <|-- GameSprite
+GameObject <|-- ObstacleComposite
+GameObject <|-- BackgroundComposite
+ObstacleComposite o-- GameSprite : children
+BackgroundComposite o-- GameSprite : BackgroundElements
+
+' Observer Pattern
+GameSubject <|-- Model
+GameObserver <|.. View
+GameSubject o-- "X" GameObserver : observers
+
+' MVC Pattern
+Controller --> Model : controls
+Controller --> View : listens to
+View --> Model : observes
+Model --> GameSprite : has
+Model --> ObstacleComposite : has
+Model --> BackgroundComposite : has
+
+' Framework extensions
+JPanel <|-- View
+KeyListener <|.. Controller
+
+' Singleton usage
+Model ..> GameConfig : uses
+GameSprite ..> GameConfig : uses
+ObstacleComposite ..> GameConfig : uses
+BackgroundComposite ..> GameConfig : uses
+Controller ..> GameConfig : uses
+GameObject ..> ResourceLoader : uses
+GameConfig -|> GameConfig : instence
+
+
+note right of GameConfig
+  <b>Singleton Pattern</b>
+  Single instance for
+  game configuration
+end note
+
+note right of MovementStrategy
+  <b>Strategy Pattern</b>
+  Different movement
+  behaviors
+end note
+
+note right of GameObject
+  <b>Composite Pattern</b>
+  Component interface
+end note
+
+note left of Model
+  <b>MVC Pattern</b>
+  Model: Game logic
+  View: UI rendering
+  Controller: Input handling
+end note
+
+note bottom of GameSubject
+  <b>Observer Pattern</b>
+  Subject notifies
+  observers of changes
+end note
+
+@enduml

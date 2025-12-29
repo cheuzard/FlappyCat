@@ -1,3 +1,13 @@
+package MVC.model;
+
+import config.GameConfig;
+import entity.BackgroundComposite;
+import entity.GameSprite;
+import entity.ObstacleComposite;
+import observer.GameSubject;
+import strategy.GravityStrategy;
+import strategy.MovementStrategy;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -5,7 +15,7 @@ import java.util.List;
 // ==========================================
 // MODÈLE (MVC)
 // ==========================================
-class Model extends GameSubject {
+public class Model extends GameSubject {
     public GameSprite cat;
     public List<ObstacleComposite> obstacles;
     public BackgroundComposite background = new BackgroundComposite();
@@ -16,12 +26,13 @@ class Model extends GameSubject {
 
     public Model() {
         reset();
+        cat.y = GameConfig.getInstance().HEIGHT - 55;
     }
 
     public void reset() {
         GameConfig conf = GameConfig.getInstance();
         // Le chat commence avec la stratégie Gravité
-        cat = new GameSprite(100, conf.HEIGHT / 2 , 80, (int)(80*0.575), "chat.png", new GravityStrategy(), Color.ORANGE);
+        cat = new GameSprite(100, conf.HEIGHT / 2, 80, (int) (80 * 0.575), "images/chat.png", new GravityStrategy(), Color.ORANGE);
         obstacles = new ArrayList<>();
         score = 0;
         isGameOver = false;

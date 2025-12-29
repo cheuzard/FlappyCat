@@ -1,10 +1,15 @@
+package entity;
+
+import config.GameConfig;
+import strategy.BooksScrollStrategy;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 // Composite : Un Obstacle composé de deux livres (Haut et Bas)
-class ObstacleComposite extends GameObject {
+public class ObstacleComposite extends GameObject {
     private final List<GameSprite> children = new ArrayList<>();
     private boolean passed = false; // Pour compter le score
 
@@ -28,10 +33,10 @@ class ObstacleComposite extends GameObject {
         int gapY = new Random().nextInt(maxRange) + minGapY;
 
         // 3. Create Top Book
-        children.add(new GameSprite(x, gapY - fixedHeight, fixedWidth, fixedHeight, "livre.png", new BooksScrollStrategy(), Color.RED));
+        children.add(new GameSprite(x, gapY - fixedHeight, fixedWidth, fixedHeight, "images/livre.png", new BooksScrollStrategy(), Color.RED));
 
         // 4. Create Bottom Book
-        children.add(new GameSprite(x, gapY + conf.PIPE_GAP, fixedWidth, fixedHeight, "livre.png", new BooksScrollStrategy(), Color.RED));
+        children.add(new GameSprite(x, gapY + conf.PIPE_GAP, fixedWidth, fixedHeight, "images/livre.png", new BooksScrollStrategy(), Color.RED));
     }
 
     @Override

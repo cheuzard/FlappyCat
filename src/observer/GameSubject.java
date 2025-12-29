@@ -1,7 +1,9 @@
+package observer;
+
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class GameSubject {
+public abstract class GameSubject {
     protected List<GameObserver> observers = new ArrayList<>();
 
     public void attach(GameObserver o) {

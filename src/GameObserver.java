@@ -1,3 +1,0 @@
-interface GameObserver {
-    void updateView();
-}

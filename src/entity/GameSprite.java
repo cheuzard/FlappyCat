@@ -1,18 +1,18 @@
+package entity;
+
+import strategy.MovementStrategy;
+
 import java.awt.*;
 
 // Leaf (Feuille) : Un objet simple (ex: le Chat, ou un seul Livre)
-class GameSprite extends GameObject {
-    private MovementStrategy strategy;
+public class GameSprite extends GameObject {
+    private final MovementStrategy strategy;
     private final Color fallbackColor; // Couleur si pas d'image
 
     public GameSprite(int x, int y, int w, int h, String imgPath, MovementStrategy strat, Color color) {
         super(x, y, w, h, imgPath);
         this.strategy = strat;
         this.fallbackColor = color;
-    }
-
-    public void setStrategy(MovementStrategy s) {
-        this.strategy = s;
     }
 
     public MovementStrategy getStrategy() {

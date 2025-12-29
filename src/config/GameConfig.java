@@ -1,3 +1,5 @@
+package config;
+
 import java.io.*;
 
 // ==========================================
@@ -5,7 +7,7 @@ import java.io.*;
 // ==========================================
 // Rôle : Garantir une unique instance de configuration accessible partout.
 // Gestion du stockage (High Score) incluse ici.
-class GameConfig {
+public class GameConfig {
     private static GameConfig instance;
 
     public final int BACKGROUND_SPEED = 3;

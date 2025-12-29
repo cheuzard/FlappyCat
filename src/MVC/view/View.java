@@ -1,10 +1,17 @@
+package MVC.view;
+
+import MVC.model.Model;
+import config.GameConfig;
+import entity.ObstacleComposite;
+import observer.GameObserver;
+
 import javax.swing.*;
 import java.awt.*;
 
 // ==========================================
 // VUE (MVC)
 // ==========================================
-class View extends JPanel implements GameObserver {
+public class View extends JPanel implements GameObserver {
     private final Model model;
 
     public View(Model model) {
@@ -45,15 +52,15 @@ class View extends JPanel implements GameObserver {
             g.fillRect(0, 0, getWidth(), getHeight());
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 40));
-            g.drawString("GAME OVER", GameConfig.getInstance().WIDTH/2 - 40*3, 250);
+            g.drawString("GAME OVER", GameConfig.getInstance().WIDTH / 2 - 40 * 3, 250);
             g.setFont(new Font("Arial", Font.PLAIN, 20));
-            g.drawString("Appuyez sur ESPACE pour rejouer", GameConfig.getInstance().WIDTH/2 - 150, 300);
-        }else if (model.isFirstRun) {
+            g.drawString("Appuyez sur ESPACE pour rejouer", GameConfig.getInstance().WIDTH / 2 - 150, 300);
+        } else if (model.isFirstRun) {
             g.setColor(new Color(0, 0, 0, 170));
             g.fillRect(0, 0, getWidth(), getHeight());
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 30));
-            g.drawString("APPUIEZ SUR ESPACE POUR COMMENCER", GameConfig.getInstance().WIDTH/2 - 300, 250);
+            g.drawString("APPUIEZ SUR ESPACE POUR COMMENCER", GameConfig.getInstance().WIDTH / 2 - 300, 250);
         }
     }
 }

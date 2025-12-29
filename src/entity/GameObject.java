@@ -1,7 +1,11 @@
+package entity;
+
+import util.ResourceLoader;
+
 import java.awt.*;
 
 // Component (Interface commune)
-abstract class GameObject {
+public abstract class GameObject {
     public int x, y, width, height;
     protected Image image; // Pour le dessin
 

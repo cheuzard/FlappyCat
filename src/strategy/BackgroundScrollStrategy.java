@@ -1,4 +1,9 @@
-class BackgroundScrollStrategy implements MovementStrategy{
+package strategy;
+
+import config.GameConfig;
+import entity.GameObject;
+
+public class BackgroundScrollStrategy implements MovementStrategy {
     @Override
     public void move(GameObject obj) {
         obj.x -= GameConfig.getInstance().BACKGROUND_SPEED;
