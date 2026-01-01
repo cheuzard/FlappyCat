@@ -2,10 +2,8 @@ package config;
 
 import java.io.*;
 
-// ==========================================
+
 // 1. PATRON SINGLETON : Configuration du Jeu
-// ==========================================
-// Rôle : Garantir une unique instance de configuration accessible partout.
 // Gestion du stockage (High Score) incluse ici.
 public class GameConfig {
     private static GameConfig instance;
@@ -34,7 +32,7 @@ public class GameConfig {
         return instance;
     }
 
-    // Gestion du stockage (fichier)
+    // Gestion du stockage du score (fichier)
     public void saveHighScore(int score) {
         if (score > highScore) {
             highScore = score;

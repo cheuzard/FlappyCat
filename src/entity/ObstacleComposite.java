@@ -23,7 +23,8 @@ public class ObstacleComposite extends GameObject {
 
         // 1. Define the constant dimensions
         int fixedWidth = 90;
-        // Using the specific ratio you provided: 90 * 8.377 ≈ 754 pixels
+
+        //  keeping image ratio
         int fixedHeight = (int) (fixedWidth * 8.377);
 
         int minGapY = 50;
@@ -32,10 +33,10 @@ public class ObstacleComposite extends GameObject {
 
         int gapY = new Random().nextInt(maxRange) + minGapY;
 
-        // 3. Create Top Book
+        // 2. Create Top Book
         children.add(new GameSprite(x, gapY - fixedHeight, fixedWidth, fixedHeight, "images/livre.png", new BooksScrollStrategy(), Color.RED));
 
-        // 4. Create Bottom Book
+        // 3. Create Bottom Book
         children.add(new GameSprite(x, gapY + conf.PIPE_GAP, fixedWidth, fixedHeight, "images/livre.png", new BooksScrollStrategy(), Color.RED));
     }
 

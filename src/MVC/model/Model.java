@@ -29,6 +29,7 @@ public class Model extends GameSubject {
         cat.y = GameConfig.getInstance().HEIGHT - 55;
     }
 
+    //revenir a l'etat initial du jeu
     public void reset() {
         GameConfig conf = GameConfig.getInstance();
         // Le chat commence avec la stratégie Gravité
@@ -42,6 +43,8 @@ public class Model extends GameSubject {
     }
 
     public void jump() {
+        // dans le cas ou le jeu n'est pas en cours
+        //jump sert a demarrer/rejouer le jeu
         if (!isGameOver && !isFirstRun) {
             MovementStrategy s = cat.getStrategy();
             if (s instanceof GravityStrategy) {
@@ -55,6 +58,8 @@ public class Model extends GameSubject {
     }
 
     public void updateGame() {
+
+        // 0. Si le jeu est terminé ou en attente de démarrage, ne rien faire
         if (isGameOver || isFirstRun) return;
 
         // 1. Mise à jour du chat

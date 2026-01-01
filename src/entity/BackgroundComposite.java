@@ -7,12 +7,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//composite de fond d'écran avec scroll infini
 public class BackgroundComposite extends GameObject {
     List<GameSprite> BackgroundElements = new ArrayList<>();
     GameConfig config = GameConfig.getInstance();
 
     public BackgroundComposite() {
         super(0, 0, 0, 0, null);
+        //deux images de fond pour faire un scroll infini
         BackgroundElements.add(new GameSprite(0, 0, config.WIDTH, config.HEIGHT, "images/fond.png", new BackgroundScrollStrategy(), null));
         BackgroundElements.add(new GameSprite(config.WIDTH, 0, config.WIDTH, config.HEIGHT, "images/fond.png", new BackgroundScrollStrategy(), null));
 
